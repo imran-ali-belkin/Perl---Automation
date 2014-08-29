@@ -1,0 +1,92 @@
+C7 COMBO/RPOTS T0 to VEP by card script generator requirements
+
+Script Generator Name:
+
+  C7-COMBO_RPOTS_T0_to_VEP_By_Card_Script_Generator.exe
+  
+
+Script generator questions to ask the user:
+  1. Please enter either the IP address or hostname of the C7 you want to reach:
+  2. Enter the COMBO or RPOTS node-shelf-slot you want to retrieve on (example N1-1-1 or N2-1-20):
+  3. Enter the C7 TDMGW IG (example N3-1-IG4)
+  4. Enter the C7 SIVCG IG (example N1-1-IG5)
+
+    
+  
+TL1 Command:
+
+  RTRV-CRS-T0::N3-1-17-all;
+  
+Output:
+
+   "N1-1-IG2-401,N3-1-17-1:2WAY:NSG=4,NDS0=1,NAILUP=N,BWC=,IG=,TVC=,"
+
+   
+Create 4 files:
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File name:
+
+Delete_T0_CRS_Nx-x-x <-- Where Nx-x-x = Question2.
+
+TL1 Output:
+
+DLT-CRS-T0::N1-1-IG2-401,N3-1-17-1;
+
+Pattern Match:
+
+DLT-CRS-T0::[SRC from output],[Dest from output];
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File name:
+
+Create_SIPVCG_CRS_Nx-x-x <-- Where Nx-x-x = Question2.
+
+TL1 Output:
+
+ENT-CRS-T0::N1-1-IG2-401,N1-1-IG5-NEXT;
+
+Pattern Match:
+
+ENT-CRS-T0::[CRV from Output],[Ques #4 add -NEXT];
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File name:
+
+Create_VEP_Nx-x-x <-- Where Nx-x-x = Question2.
+
+TL1 Output:
+
+ENT-VEP::N3-1-17-VEP1::::IGAID=N3-1-IG4,AOR=N1-1-IG2-401;
+
+Pattern Match:
+
+ENT-VEP::[Dest from Output where the last digit (port number) is the VEP#]::::IGAID=[Ques #3],AOR=[CRV from Output];
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File name:
+
+Create_VEP_CRS_To_TDMGW_Nx-x-x <-- Where Nx-x-x = Question2.
+
+TL1 Output:
+
+ENT-CRS-T0::N3-1-17-VEP1,N3-1-IG4-NEXT
+
+Pattern Match:
+
+ENT-CRS-T0::[Dest from Output where the last digit (port number) is the VEP#],[Ques #3 add -NEXT];
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------

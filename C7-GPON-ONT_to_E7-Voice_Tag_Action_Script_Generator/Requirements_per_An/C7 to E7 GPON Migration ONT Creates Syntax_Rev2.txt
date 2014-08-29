@@ -1,0 +1,34 @@
+C7 to E7 GPON ONT Creation Script Genterator
+
+TL script generator ran on C7.
+
+GPON_Port_TL1_Script_Generator_for_C7.exe
+
+File from output used:
+
+tl1_logs_ONT_.txt
+
+
+TL1 Command:
+
+RTRV-ONT::N130-1-1-ALL;
+
+Output:
+
+"N130-1-1-1-1::ONTNUM=5D0D7,REGID=7015674000,ONTPROF=30,VCG=N105-1-IG3,VENDOR=CXNK,BATPROV=Y,SDBER=5,GOS=OFF,DESC=\"HETTINGER CO 407 3RD AVE N\",ADRMODE=GRP:OOS-AU,SDEE&SGEO&UEQ"
+
+E7 CLI Command:
+
+create ont 11301 profile 30 serial-number 5D0D7 reg-id 7015674000 description "HETTINGER CO 407 3RD AVE N" admin-state enabled
+
+Pearl Script pattern match:
+
+create ont [ONT start number] profile [ONTPROF=#] serial-number [ONTNUM=#] reg-id [REGID=#] description ["DESC=info"] admin-state enabled
+
+Script generator questions to ask the user:
+1. Please enter either the IP address or hostname of the C7 you want to reach:
+2. Enter the GPON node-shelf-slot you want to retreive on (example N1-1-1 or N2-1-20):
+3. Enter the E7 start ONT number for GPON PORT 1.
+4. Enter the E7 start ONT number for GPON PORT 2.
+4. Enter the E7 start ONT number for GPON PORT 3.
+4. Enter the E7 start ONT number for GPON PORT 4.

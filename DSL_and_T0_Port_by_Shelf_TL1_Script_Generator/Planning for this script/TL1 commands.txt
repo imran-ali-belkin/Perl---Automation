@@ -1,0 +1,212 @@
+1. Prompt the user for what slot the card is currently in
+2. Prompt the user for the destination slot
+
+Scripts to be created:
+1) ENT-ONT for the new slot based on the RTRV-ONT command 
+2) An edit ONT which puts the existing ONT out of service OOS and edits the ONT num to something bogus
+	ED-ONT::N2-1-18-1-1:::::OOS;			
+	ED-ONT::N2-1-18-1-1::::ONTNUM=50000;		# This is the bogus number
+
+==================
+Retrieving the ONT - COMPLETED
+==================
+> rtrv-ont::n2-1-18-all;
+>
+   TACTRN02 12-01-26 14:00:37
+M  1 COMPLD
+   "N2-1-18-1-1::ONTNUM=5555,ONTPROF=1,VCG=N1-1-IG3,VENDOR=CXNK,BATPROV=Y,SDBER=5,GOS=OFF,DESC=\"Jimmy Joe\",ADRMODE=GRP:OOS-AUMA,SGEO&UEQ"
+   "N2-1-18-1-2::ONTNUM=7777,ONTPROF=8,VCG=N1-1-IG3,VENDOR=CXNK,BATPROV=Y,SDBER=5,GOS=OFF,DESC=\"hoogie\",ADRMODE=GRP:OOS-AUMA,SGEO&UEQ"
+   /* 2 records processed */
+
+
+===========================
+Example of entering an ONT: - COMPLETED
+===========================
+> ent-ont::n2-1-18-1-3::::ONTNUM=11111,ONTPROF=8,VCG=N1-1-IG3,DESC=\"jojo\",ADRMODE=GRP;
+
+
+
+
+
+=============================================
+Example of retriving all T0s on the GPON card - COMPLETED
+=============================================
+> rtrv-t0::n2-1-18-all;
+>
+
+   TACTRN02 12-01-26 14:09:29
+M  1 COMPLD
+   "N2-1-18-1-1-1::GSFN=2LS,RTLP=0.0,TTLP=0.0,DESC=\"YoPort1\":OOS-AU,AINS&SGEO"
+   "N2-1-18-1-1-2::GSFN=2LS,RTLP=0.0,TTLP=0.0,DESC=\"YoPort2\":OOS-AU,AINS&SGEO"
+   "N2-1-18-1-1-3::GSFN=2LS,RTLP=0.0,TTLP=0.0,DESC=\"YoPort3\":OOS-AU,AINS&SGEO"
+   "N2-1-18-1-1-4::GSFN=2LS,RTLP=0.0,TTLP=0.0,DESC=\"YoPort4\":OOS-AU,AINS&SGEO"
+   "N2-1-18-1-1-5::GSFN=2LS,RTLP=0.0,TTLP=0.0,DESC=\"YoPort5\":OOS-AU,AINS&SGEO"
+   "N2-1-18-1-1-6::GSFN=2LS,RTLP=0.0,TTLP=0.0,DESC=\"YoPort6\":OOS-AU,AINS&SGEO"
+   "N2-1-18-1-1-7::GSFN=2LS,RTLP=0.0,TTLP=0.0,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-8::GSFN=2LS,RTLP=0.0,TTLP=0.0,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-2-1::GSFN=2LS,RTLP=0.0,TTLP=0.0,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-2-2::GSFN=2LS,RTLP=0.0,TTLP=0.0,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-3-1::GSFN=2LS,RTLP=0.0,TTLP=0.0,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-3-2::GSFN=2LS,RTLP=0.0,TTLP=0.0,:OOS-AU,AINS&ADA&SGEO"
+   /* 12 records processed */
+
+==============================
+Example of editing the T0 port - COMPLETED
+==============================
+Note: Edit the port description with just without the escape sequences 
+> ed-t0::n2-1-18-1-3-2::::DESC=WOOO;
+
+
+=========================
+Retrieving ethernet ports - COMPLETED
+=========================
+> rtrv-eth::n2-1-18-all;
+>
+
+   TACTRN02 12-01-26 14:16:57
+M  1 COMPLD
+   "N2-1-18-1-1-1::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-2::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-3::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-4::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-5::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-6::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-7::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-8::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-2-1::MAXSPD=1000,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-2-2::MAXSPD=100,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,HPNA=Y,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-3-1::MAXSPD=1000,SPD=1000,DPLX=FULL,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,DESC=\"woohoo\":OOS-AUMA,AINS&SGEO"
+   "N2-1-18-1-3-2::MAXSPD=100,SPD=AUTO,DPLX=AUTO,MTU=1626,VIDTXMODE=MCAST,ENONBAT=USEDEF,HPNA=Y,:OOS-AU,AINS&ADA&SGEO"
+   /* 12 records processed */
+
+=========================================
+Editing the Ethernet port Out of Service: - COMPLETED
+=========================================
+ed-eth::n2-1-18-1-1-1:::::OOS;
+
+=========================================
+Editing the Ethernet port In Service: - COMPLETED
+=========================================
+ed-eth::n2-1-18-1-1-1:::::IS;
+
+
+
+
+
+
+=====================================
+Retrieve the T1 ports on an OLTG Card - COMPLETED
+=====================================
+> rtrv-t1::n2-1-18-all;
+>
+
+   TACTRN02 12-01-26 14:23:18
+M  1 COMPLD
+   "N2-1-18-1-1-1::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,DESC=\"YOGI\":OOS-AUMA,AINS&SGEO"   
+   "N2-1-18-1-1-2::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-3::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-4::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-5::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-6::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-7::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,:OOS-AU,AINS&ADA&SGEO"
+   "N2-1-18-1-1-8::TYPE=DS1,T1MAP=NA,EQLZ=300,FMT=UF,LINECDE=B8ZS,GOS=OFF,TMGMODE=LOOP,IBLBEN=N,:OOS-AU,AINS&ADA&SGEO"
+   /* 8 records processed */
+
+===========================
+Putting a T1 Out of Service - COMPLETED
+===========================
+ed-t1::N2-1-18-1-1-1:::::OOS;
+
+==========================
+Putting a T1 In To Service
+==========================
+ed-t1::N2-1-18-1-1-1:::::Is;
+
+
+
+
+
+==============
+AVO VIDEO PORTS
+==============
+When an ONT that supports RFVID is created the only port displayed is an AVO port. So on the retrieves you will need to
+retrieve the AVO and RFVID ports. Then you will do a create file that edits the AVO port, and creates the RFVID ports
+
+=========================
+Retrieving the AVO ports: - COMPLETED
+=========================
+> rtrv-avo::n2-1-18-all;
+>
+
+   TACTRN02 12-01-26 14:48:32
+M  1 COMPLD
+   "N2-1-18-1-1-1::OMI=3.8,RFRTRN=LOCKED,:OOS-AU,ADA&SGEO"
+   "N2-1-18-1-4-1::OMI=3.8,RFRTRN=LOCKED,DESC=\"HALWowWow\":OOS-AU,SGEO"
+
+ed
+
+======================
+Editing the AVO Ports: - COMPLETED
+======================
+> ed-avo::n2-1-18-1-1-1::::DESC=SUPERJANKY,OMI=3.8,RFRTRN=LOCKED;
+
+
+================================
+Editing the AVO Ports OOS and IS - COMPLETED
+================================
+ed-avo::n2-1-18-1-1-1:::::OOS;
+>
+
+   TACTRN02 12-01-26 14:51:22
+M  1 COMPLD
+   /* One record processed */
+;ed-avo::n2-1-18-1-1-1:::::IS
+>
+>
+
+   TACTRN02 12-01-26 14:51:32
+M  1 COMPLD
+   /* One record processed */
+
+
+===========================
+Retrieving the RFVID ports:
+===========================
+> rtrv-rfvid::n2-1-18-all;
+>
+
+   TACTRN02 12-01-26 14:54:39
+M  1 COMPLD
+   N2-1-18-1-1-1::ENONBAT=USEDEF,DESC=\"WOOHOO\":OOS-AU,AINS&SGEO
+   /* One record processed */
+
+=========================
+Creating the RFVID ports:
+=========================
+   ent-rfvid::n2-1-18-1-1-2::::DESC=HOOHAAA
+   ent-rfvid::n2-1-18-1-1-3::::DESC=WOOGIEWOOGIE,ENONBAT=USEDEF;   	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+No match for:  
+No match for:   
+No match for:  
+No match for:  
+No match for: > ACT-USER::c7support:::********; 
+No match for: >  
+No match for:  
+No match for:    NATCHITOCHES 02-04-12 14:08:15 
+No match for: M  1 COMPLD 
+No match for:    /* *** WELCOME TO THE CALIX C7. AUTHORIZED ACCESS ONLY. *** */ 
+No match for: ; 
+No match for: > INH-MSG-ALL; 
+No match for: >  
+No match for:  
+No match for:    NATCHITOCHES 02-04-12 14:08:16 
+No match for: M  1 COMPLD 
+No match for:    /* One record processed */ 
+No match for: ;RTRV-CRS-VIDVC::N15-1-ALL::::IRCAID=N1-1-7,APP=IP; 
+No match for: >  
+No match for:  
+No match for:    NATCHITOCHES 02-04-12 14:08:17 
+No match for: M  1 COMPLD 
+No match for:    /* 7 records processed */ 
+No match for: ; 

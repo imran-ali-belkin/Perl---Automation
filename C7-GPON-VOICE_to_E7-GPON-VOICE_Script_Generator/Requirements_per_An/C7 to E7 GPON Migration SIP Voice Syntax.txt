@@ -1,0 +1,80 @@
+C7 GPON to E7 GPON SIP Voice Creation Script Generator
+
+Script Generator Name:
+
+  C7-GPON-ONT_to_E7-GPON-DATA_Script_Generator.exe
+
+Script generator questions to ask the user:
+  1. Please enter either the IP address or hostname of the C7 you want to reach:
+  2. Enter the GPON node-shelf-slot you want to retrieve on (example N1-1-1 or N2-1-20):
+  3. Enter the E7 sip-rmt-cfg-profile(example: @E7_GPON_SIP)
+  5. Enter the E7 start ONT pre-fix for GPON PORT 1.
+  6. Enter the E7 start ONT pre-fix for GPON PORT 2.
+  7. Enter the E7 start ONT pre-fix for GPON PORT 3.
+  8. Enter the E7 start ONT pre-fix for GPON PORT 4.
+  
+  
+  
+  
+  
+Create 2 E7 script files for output:
+
+
+
+
+File #1: Name E7_ONT_Voice_Port_Settings
+
+C7 TL1 Command:
+
+   RTRV-T0::N130-1-1-ALL;
+
+Output:
+
+    "N130-1-1-1-3-1::GSFN=2LS,RTLP=GR909,TTLP=GR909,DESC=\"7015672598\":OOS-AU,SDEE&SGEO"
+   
+E7 CLI Command:
+
+   set ont-port 51203/p1 system-rx-loss gr-909 system-tx-loss gr-909 description "7015672598" admin-state enabled
+
+
+pattern match:
+   
+   
+   set ont-port [See Rule#1 Below] system-rx-loss [RTLP=See Rule#2] system-tx-loss [TTLP=See Rule#2] description [DESC=] admin-state enabled
+   
+   Rule#1 - 5123/p1  (ONT#/Port#)
+		This is pulled from destination port N130-1-1-1-3-1-1 (Node-Shelf-Slot-GPON#-ONT#-VoicePort#)
+		Use the same ONT pre-fix from the ONT script Generator to create the ONT number.  Use the ONT pre-fix, then add ONT# = 51203 (ONT Pre-Fix=512, ONT#3) Remember to add a 0 (zero) for ONTs 1-9.
+		For the ONT voice port (p1), use the VoicePort# after the ONT#, in this case it is 1. If it is 2, use p2, etc. 
+   
+   Rule#2 - For RLTP/TTLP=GR909 on the C7, use gr-909 (lower case with a dash) on the E7
+			For RLTP/TTLP=ANSI on the C7, use ansi (lower case) on the E7 
+   
+   
+   
+   
+File #2: E7_ONT_SIP_Provisioning  
+  
+  
+C7 TL1 Command:
+
+   RTRV-VEP::N130-1-1-ALL;
+   
+Output:
+
+   N130-1-1-1-3-VEP1::IGAID=N130-1-IG6,USER=7015674000,PID=11M00c97,AOR=7015674000,HOSTPROTO=DHCP,:OOS-AU,SGEO&SDEE;
+   
+E7 CLI Command:
+
+add sip-svc to-ont-port 51203/p1 sip-rmt-cfg-profile @E7_GPON_SIP user 7015674000 password 11M00c97 uri 7015674000 sip-rmt-cfg-override enabled admin-state enabled
+
+
+pattern match:
+
+  add sip-svc to-ont-port [See Rule#1 Below] sip-rmt-cfg-profile [Question #3) user [USER=] password [PID=] uri [AOR=] sip-rmt-cfg-override enabled admin-state enabled
+  
+  Rule#1 - 5123/p1  (ONT#/Port#)
+		This is pulled from destination port N130-1-1-1-3-1-1 (Node-Shelf-Slot-GPON#-ONT#-VEP#)
+		Use the same ONT pre-fix from the ONT script Generator to create the ONT number.  Use the ONT pre-fix, then add ONT# = 51203 (ONT Pre-Fix=512, ONT#3)
+		For the ONT voice port (p1), use the VEP# after the ONT#, in this case it is VEP1. If it is VEP2, use p2, etc. 
+		

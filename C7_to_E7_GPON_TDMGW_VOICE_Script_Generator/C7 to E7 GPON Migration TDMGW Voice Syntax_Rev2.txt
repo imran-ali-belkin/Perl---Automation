@@ -1,0 +1,97 @@
+C7 GPON to E7 GPON TDMGW Voice Creation Script Generator
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Script Generator Name:
+
+  C7-GPON-ONT_to_E7-GPON-TDMGW_VOICE_Script_Generator.exe
+  
+-----------------------------------------------------------------------------------------------------------------------------------------------------------  
+												Perl Variable
+Script generator questions to ask the user:
+  1. Please enter either the IP address or hostname of the C7 you want to reach:
+  2. Enter the GPON node-shelf-slot you want to retrieve on (example N1-1-1 or N2-1-20):	
+  3. Enter the C7 SIPVCG Group (example: N1-1-IG3).						$C7_SIPVCG_group
+  4. Enter the E7 tdm-gw-profile(example: @E7_TDMGW)						$E7_tdm_gw_profile
+  5. Enter the E7 start ONT pre-fix for GPON PORT 1.
+  6. Enter the E7 start ONT pre-fix for GPON PORT 2.
+  7. Enter the E7 start ONT pre-fix for GPON PORT 3.
+  8. Enter the E7 start ONT pre-fix for GPON PORT 4.
+
+
+
+  
+-----------------------------------------------------------------------------------------------------------------------------------------------------------  
+  
+C7 TL1 Command:
+
+   rtrv-crs-t0::N1-1-16-all;
+
+Output:
+
+    "N1-1-IG1-1,N1-1-16-1-1-1:2WAY:NSG=4,NDS0=1,NAILUP=N,BWC=,IG=,TVC=,ECMODE=USEIG,"
+   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Output 3 Files:							Perl File Handles
+
+	1_T0_DELETES_FOR_Nx-x-x.txt				$fh_T0_DELETES				
+	2_T0_CREATES_FOR_Nx-x-x.txt				$fh_T0_CREATES
+	3_E7_SYNTAX_FOR_CRV_Nx-x-x.txt				$fh_E7_CREATES
+
+	(Where Nx-x-x is the input from step 2 above.)  
+	
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+File 1 (1_T0_DELETES_FOR_Nx-x-x.txt)
+
+	C7 command:
+	
+	DLT-CRS-T0::N1-1-IG1-1,N1-1-16-1-1-1;
+   
+pattern match:
+
+	DLT-CRS-T0::[CRV_from_Output],[ONT_PORT_from_Output];
+	
+	
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+File 2 (2_T0_CREATES_FOR_Nx-x-x.txt)
+
+
+C7 command:
+	
+	ENT-CRS-T0::N1-1-IG1-1,N1-1-IG3-NEXT;
+   
+pattern match:
+
+	ENT-CRS-T0::[CRV_From_Output],[Question#3]-NEXT;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+File 3 (3_E7_SYNTAX_FOR_CRV_Nx-x-x.txt)
+
+   
+   
+   E7 CLI Command:
+
+	add tdm-gw-svc to-ont-port 51201/p1 tdm-gw-profile @E7_TDMGW crv N1-1-IG1-1 admin-state enabled
+
+  
+
+pattern match:
+
+  add tdm-gw-svc to-ont-port [See Rule#1 Below] tdm-gw-profile [Question #4) crv [CRV_Value_from_TL1_Output] admin-state enabled
+  
+  Rule#1 - 51201/p1  (ONT#/Port#)
+		This is pulled from destination port N1-1-16-1-1-1 (Node-Shelf-Slot-GPON#-ONT#-ONT_Voice_Port#)
+		Use the same ONT pre-fix from the ONT script Generator to create the ONT number.  Use the ONT pre-fix, then add ONT# = 51201 (ONT Pre-Fix=512, ONT#1)
+		For the ONT voice port (p1), use the ONT_Voice_Port# after the ONT#, in this case it is 1. If it is 2, use p2, etc. 
+		

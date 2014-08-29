@@ -1,0 +1,40 @@
+C7 GPON to E7 GPON Video Creation Script Generator
+
+Script Generator Name:
+
+  C7-GPON-ONT_to_E7-GPON-Video_Script_Generator.exe
+  
+
+Script generator questions to ask the user:
+  1. Please enter either the IP address or hostname of the C7 you want to reach:
+  2. Enter the GPON node-shelf-slot you want to retreive on (example N1-1-1 or N2-1-20):
+  3. Enter the IRC Location node-shelf-slot (example N1-1-20)
+  4. Enter the E7 Video Service Tag Action (example @Video)
+  5. Enter the E7 Multicast Profile (example @Multicast)
+  6. Enter the E7 start ONT pre-fix for GPON PORT 1.
+  7. Enter the E7 start ONT pre-fix for GPON PORT 2.
+  8. Enter the E7 start ONT pre-fix for GPON PORT 3.
+  9. Enter the E7 start ONT pre-fix for GPON PORT 4.
+  
+  
+TL1 Command:
+
+  RTRV-VID-SUB::N130-1-1-ALL::::RTRAID=N105-1-20;  
+  
+Output:
+
+   "N130-1-1-1-4-1::RTRAID=N105-1-20,CHANCNT=4,VIDBW=38700,VIDLOANBW=2000,BWINUSE=7414,CHANIP=224.2.2.201&239.1.0.5&239.1.0.62&239.255.5.3,STBIP=10.100.47.5&10.100.44.250&10.100.36.164&10.100.35.166"
+   
+E7 CLI Command:
+
+   add eth-svc Video1 to-ont-port 15204/g1 bw-profile 38700 svc-tag-action @Video mcast-profile @Multicast admin-state enabled
+   
+   
+pattern match:
+
+   add eth-svc Data1 to-ont-port [See Rule#1 Below] bw-profile [VIDBW=] svc-tag-action [Question #4] mcast-profile [Question #5] admin-state enabled
+
+   Rule#1 - 51204/g1  (ONT#/port#)
+		This is pulled from destination port N130-1-1-1-3-1-1 (Node-Shelf-Slot-GPON#-ONT#-Port#)
+		Use the same ONT pre-fix from the ONT script Generator to create the ONT number.  Use the ONT pre-fix, then add ONT# = 51204 (ONT Pre-Fix=512, ONT#4)
+		For the ONT port (g1), use the Port# after the ONT#, in this case it is 1. If the number is 2, use g2, etc.    

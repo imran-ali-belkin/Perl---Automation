@@ -1,0 +1,25 @@
+
+ 
+
+
+> ACT-USER::c7support:::********;
+> 
+
+   CO 13-08-20 13:44:38
+M  1 COMPLD
+   /* *** WELCOME TO THE CALIX C7. AUTHORIZED ACCESS ONLY. ***GOOD MORNING */
+   /*  CHRIS */
+;
+> INH-MSG-ALL;
+> 
+
+   CO 13-08-20 13:44:38
+M  1 COMPLD
+   /* One record processed */
+;RTRV-T1::N1-2-18-ALL;
+> 
+
+   CO 13-08-20 13:44:39
+M  1 COMPLD
+   /* No records processed */
+;

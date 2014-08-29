@@ -1,0 +1,37 @@
+Variables for the VLANIF EXA to VLANIF EXA TL1 Script Generator:
+
+192.168.0.42
+N201-1-20
+N200-1-VB1
+10
+50
+
+IRC Location N200-1-20
+
+
+
+File Handles:
+$fh
+$fh_creates		
+$fh_deletes		 
+$fh_to_get_software_version
+$fh_error
+
+$user_data_uplink
+$user_data_vb
+$user_data_vlan
+$user_future_data_vlan 
+
+
+$future_rx_prof
+$future_tx_prof
+
+
+
+
+
+
+ 
+
+
+

@@ -1,0 +1,47 @@
+C7 GPON to E7 GPON Data Creation Script Genterator
+
+Script Generator Name:
+
+  C7-GPON-ONT_to_E7-GPON-DATA_Script_Generator.exe
+
+Script generator questions to ask the user:
+  1. Please enter either the IP address or hostname of the C7 you want to reach:
+  2. Enter the GPON node-shelf-slot you want to retreive on (example N1-1-1 or N2-1-20):
+  3. Enter the E7 Service Tag Action Name (example: Data_Tag)
+  4. Enter the E7 start ONT pre-fix for GPON PORT 1.
+  5. Enter the E7 start ONT pre-fix for GPON PORT 2.
+  6. Enter the E7 start ONT pre-fix for GPON PORT 3.
+  7. Enter the E7 start ONT pre-fix for GPON PORT 4.
+  8. Enter the C7 ATM Profile(s) for APPID=IP (Enter "Done" when finished)  <-- Loop this input command until "Done" is entered.
+
+
+TL1 Command:
+
+  RTRV-CRS-VC::N130-1-1-ALL;
+
+Output:
+
+ "N130-1-11-1-1-VP4094-VC5849,N130-1-1-1-3-1-1:2WAY:KEY=N130-1-11-1-1-VP4094-VC5849,TRFPROF=25,BCKPROF=403,PATH=WKG,PC=BR,CONSTAT=NORMAL,"
+ 
+Pearl Script criteria (Only create E7 output for certain lines):
+
+  1. Only Pattern Match for Lines where Path=WKG or UNPROT
+  2. Discard all lines that have TRAFPROF=(Variable input(s) in Question #8 from above)  <-- We are filtering out the IPVC's and only want Data.
+
+E7 CLI Command:
+ 
+  add eth-svc Data1 to-ont-port 5123/g1 bw-profile 25_403 svc-tag-action Data_Tag admin-state enabled
+
+
+pattern match:
+
+  add eth-svc Data1 to-ont-port [See Rule#1 Below] bw-profile [TRFPROF_BCKPROF] svc-tag-action [Question #3] admin-state enabled
+
+  Rule#1 - 5123/g1  (ONT#/port#)
+		This is pulled from destination port N130-1-1-1-3-1-1 (Node-Shelf-Slot-GPON#-ONT#-Port#-Index#)
+		Use the same ONT pre-fix from the ONT script Generator to create the ONT number.  Use the ONT pre-fix, then add ONT# = 5123 (ONT Pre-Fix=512, ONT#3)
+		For the ONT port (g1), use the Port# after the ONT#, in this case it is 1. If the number is 2, use g2, etc. 
+		
+		
+
+

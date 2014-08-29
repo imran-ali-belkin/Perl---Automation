@@ -1,0 +1,235 @@
+<H4>	Table</H4>
+<H4>	video_game_info</H4>
+<H4>	Field				Type			Null	Key	Extra</H4>
+<H4>	video_game_ID		int unsigned 		NO 	Pri 	auto-increment </H4>
+<H4>	video_game_Name		varchar(20) 		NO</H4>
+<H4></H4>
+<H4>	PREDICATE:</H4>
+<H4>	Video game VIDEO_GAME_ID has a video game name VIDEO_GAME_NAME</H4>
+<H4></H4>
+<H4>	REFERENTIAL INTEGRITY:</H4>
+<H4>	Done</H4>
+<H4>		</H4>
+<H4>	TYPE CONSTRAINTS:</H4>
+<H4>	VIDEO_GAME_ID should be an integer greater than 0.</H4>
+<H4>	VIDEO_GAME_NAME should be normal text </H4>
+<H4></H4>
+<H4>	DATABASE CONSTRAINTS:</H4>
+<H4>	Every VIDEO_GAME_ID should be unique</H4>
+<H4>	Every VIDEO_GAME_NAME should be unique</H4>
+<H4>	</H4>
+<H4>	ENTITY INTEGRITY:</H4>
+<H4>	VIDEO_GAME_ID should always exist and no two tuples should have the same VIDEO_GAME_ID</H4>
+<H4>	VIDEO_GAME_NAME should always exist and no two tuples should have the same VIDEO_GAME_NAME value</H4>
+<H4>	</H4>
+<H4>	RELVAR CANDIDATE KEYS, PRIMARY KEYS and FOREIGN KEYS</H4>
+<H4>	Candidate Keys:	VIDEO_GAME_ID, VIDEO_GAME_NAME</H4>
+<H4>	Primary Keys:	VIDEO_GAME_ID</H4>
+<H4>	Foreign Keys:	NONE</H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4>	Table video_game_stocking</H4>
+<H4>	Field					Type			Null	Key	Extra			Note</H4>
+<H4>	video_game_ID			int(10) unsigned 	NO 	Pri 	auto-increment 	FOREIGN KEY to relvar: video_game_info, field video_game_ID</H4>
+<H4> 	video_game_quantity_in_stock 	int unsigned(3)	NO</H4>
+<H4>	video_game_status			ENUM 'New Release', '7-Day Rental', "Promotion'  NO	</H4>
+<H4></H4>
+<H4>	PREDICATE:</H4>
+<H4>	Video game VIDEO_GAME_ID  stored in a separate relvar video_game_info</H4>
+<H4>	has a quantity VIDEO_GAME_QUANTITY_IN_STOCK and is a status of VIDEO_GAME_STATUS</H4>
+<H4></H4>
+<H4>	REFERENTIAL INTEGRITY:</H4>
+<H4>	Video game VIDEO_GAME_ID is named VIDEO_GAME_ID and is through video_game_info	</H4>
+<H4></H4>
+<H4>	TYPE CONSTRAINTS:</H4>
+<H4>	VIDEO_GAME_ID  should be an integer greater than 0</H4>
+<H4>	VIDEO_GAME_QUANTITY_IN_STOCK should be an integer 0 or greater</H4>
+<H4>	VIDEO_GAME_STATUS should be an enumerated "New Release", "7-Day Rental", "Promotion"</H4>
+<H4></H4>
+<H4>	DATABASE CONSTRAINTS:</H4>
+<H4>	Every VIDEO_GAME_ID value should be unique</H4>
+<H4>	</H4>
+<H4>	ENTITY INTEGRITY:</H4>
+<H4>	VIDEO_GAME_ID should always exist and no two tuples should have the same VIDEO_GAME_ID</H4>
+<H4>	VIDEO_GAME_QUANTITY_IN_STOCK should always exist</H4>
+<H4>	VIDEO_GAME_STATUS should always exist</H4>
+<H4></H4>
+<H4>	RELVAR CANDIDATE KEYS, PRIMARY KEYS and FOREIGN KEYS</H4>
+<H4>	Candidate Keys:	VIDEO_GAME_ID</H4>
+<H4>	Primary Keys:	VIDEO_GAME_ID</H4>
+<H4>	Foreign Keys:	VIDEO_GAME_ID</H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4>	Table video_game_terms</H4>
+<H4></H4>
+<H4>	Field					Type				Null	Key	Extra			Note</H4>
+<H4>	video_game_ID			int(10) unsigned 		NO 	Pri 	auto-increment 	FOREIGN KEY to relvar: video_game_info, field video_game_ID</H4>
+<H4>	video_game_rental_price		float				NO</H4>
+<H4>	video_game_rental_period		int(3) unsigned		NO</H4>
+<H4>	video_game_daily_late_fee	float	 			NO</H4>
+<H4>	</H4>
+<H4>	PREDICATE:</H4>
+<H4>	Video game VIDEO_GAME_ID  stored in a separate relvar video_game_info</H4>
+<H4>	has a rental price VIDEO_GAME_RENTAL_PRICE</H4>
+<H4>	for a period VIDEO_GAME_RENTAL_PERIOD</H4>
+<H4>	with a daily late fee VIDEO_GAME_DAILY_LATE_FEE</H4>
+<H4></H4>
+<H4>	REFERENTIAL INTEGRITY:</H4>
+<H4>	Video game VIDEO_GAME_ID is named VIDEO_GAME_ID and is through video_game_info	</H4>
+<H4></H4>
+<H4>	TYPE CONSTRAINTS:</H4>
+<H4>	VIDEO_GAME_ID should be an integer greater than 0.</H4>
+<H4>	VIDEO_GAME_RENTAL_PRICE should be a floating number to accomodate monetary values</H4>
+<H4>	VIDEO_GAME_RENTAL_PERIOD should be a Date</H4>
+<H4>	VIDEO_GAME_PERIOD should be an integer</H4>
+<H4>	VIDEO_GAME_DAILY_LATE_FEE should be a floating number to accomodate monetary values</H4>
+<H4></H4>
+<H4>	DATABASE CONSTRAINTS:</H4>
+<H4>	Every VIDEO_GAME_ID should be unique	</H4>
+<H4></H4>
+<H4>	ENTITY INTEGRITY:</H4>
+<H4>	VIDEO_GAME_ID should always exist and no two tuples should have the same VIDEO_GAME_ID</H4>
+<H4>	VIDEO_GAME_RENTAL_PRICE should always exist</H4>
+<H4>	VIDEO_GAME_RENTAL_PERIOD should always exist</H4>
+<H4>	VIDEO_GAME_DAILY_LATE_FEE should always exist</H4>
+<H4></H4>
+<H4>	RELVAR CANDIDATE KEYS, PRIMARY KEYS and FOREIGN KEYS</H4>
+<H4>	Candidate Keys:	VIDEO_GAME_ID</H4>
+<H4>	Primary Keys:	VIDEO_GAME_ID</H4>
+<H4>	Foreign Keys:	None</H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4>	Table member_registered</H4>
+<H4>	Field				Type				Null	Key	Extra			</H4>
+<H4>	member_ID			int(10) unsigned 		NO 	Pri 	auto-increment 	</H4>
+<H4>	first_name			varchar(25) 			NO				</H4>
+<H4>	last_name			varchar(25) 			NO</H4>
+<H4>	address			varchar(50)			NO</H4>
+<H4>	phone_number		varchar(10)			NO</H4>
+<H4>	registered_status		enum ('Yes', 'No')</H4>
+<H4></H4>
+<H4>	PREDICATE:</H4>
+<H4>	Member MEMBER_ID named NAME {first_name, last_name} </H4>
+<H4>	lives at ADDRESS</H4>
+<H4>	with a telephone number PHONE_NUMBER</H4>
+<H4>	with registered status REGISTERED_STATUS</H4>
+<H4></H4>
+<H4>	REFERENTIAL INTEGRITY:</H4>
+<H4>	None</H4>
+<H4></H4>
+<H4>	TYPE CONSTRAINTS:</H4>
+<H4>	MEMBER_ID should be an integer greater than 0</H4>
+<H4>	ADDRESS should be normal text</H4>
+<H4>	PHONE_NUMBER should be phone number formatted area code-3 digits-4 digits</H4>
+<H4>	REGISTERED_STATUS should be a 'Yes' or 'No' enumeration</H4>
+<H4></H4>
+<H4>	DATABASE CONSTRAINTS:</H4>
+<H4>	Every MEMBER_ID should be unique	</H4>
+<H4>	Every ADDRESS should be unique</H4>
+<H4>	Every PHONE_NUMBER should be unique</H4>
+<H4>	</H4>
+<H4>	ENTITY INTEGRITY:</H4>
+<H4>	MEMBER_ID should always exist and no two tuples should have the same MEMBER_ID value</H4>
+<H4>	NAME should always exist</H4>
+<H4>	ADDRESS should always exist</H4>
+<H4>	PHONE_NUMBER should always exist</H4>
+<H4>	REGISTERED_STATUS should always exist</H4>
+<H4>	</H4>
+<H4>	RELVAR CANDIDATE KEYS, PRIMARY KEYS and FOREIGN KEYS</H4>
+<H4>	Candidate Keys:	MEMBER_ID, NAME</H4>
+<H4>	Primary Keys:	MEMBER_ID</H4>
+<H4>	Foreign Keys:	None</H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4>Table member_rental</H4>
+<H4>	Field				Type				Null	Key	Extra				Note			</H4>
+<H4>	member_ID			int(10) unsigned 		NO 	 	 				foreign key to relvar: member_registered, attribute: member_ID</H4>
+<H4>	transaction_ID		int(10) unsigned 		NO 	Pri 	auto-increment 		</H4>
+<H4>	video_game_ID		int(10) unsigned		NO						foreign_key to relvar: video_game_ID	</H4>
+<H4>	payment_ID			int(10) unsigned		NO						foreign key to  relvar member_payments, attribute: payment_ID </H4>
+<H4>	rental_date			Date				NO</H4>
+<H4>	return_date			Date				NO</H4>
+<H4></H4>
+<H4>	PREDICATE:</H4>
+<H4>	Member MEMBER_ID stored in a separate relvar member_registered</H4>
+<H4>	had a transaction TRANSACTION_ID</H4>
+<H4>	for game VIDEO_GAME_ID</H4>
+<H4>	with a payment id PAYMENT_ID</H4>
+<H4>	with a rental date RENTAL_DATE</H4>
+<H4></H4>
+<H4>	REFERENTIAL INTEGRITY:</H4>
+<H4>	Member MEMBER_ID named MEMBER_ID and is through member_registered	</H4>
+<H4></H4>
+<H4>	TYPE CONSTRAINTS:</H4>
+<H4>	MEMBER_ID should be an integer greater than 0</H4>
+<H4>	TRANSACTION_ID should be an integer greater than 0</H4>
+<H4>	VIDEO_GAME_ID should be an integer greater than 0</H4>
+<H4>	PAYMENT_ID should be an integer greater than 0</H4>
+<H4>	RENTAL_DATE should be a date format</H4>
+<H4></H4>
+<H4>	DATABASE CONSTRAINTS:</H4>
+<H4>	Every TRANSACTION_ID should be unique	</H4>
+<H4></H4>
+<H4>	ENTITY INTEGRITY:</H4>
+<H4>	TRANSACTION_DATE should always exist and no two tuples should have the same TRANSACTION_DATE value</H4>
+<H4>	MEMBER_ID should always exist</H4>
+<H4>	VIDEO_GAME_ID should always exist</H4>
+<H4>	PAYMENT_ID should always exist</H4>
+<H4>	RENTAL_DATE should always exist</H4>
+<H4>	RETURN_DATE should always exist</H4>
+<H4>	</H4>
+<H4>	RELVAR CANDIDATE KEYS, PRIMARY KEYS and FOREIGN KEYS</H4>
+<H4>	Candidate Keys:	TRANSACTION_ID</H4>
+<H4>	Primary Keys:	TRANSACTION_ID</H4>
+<H4>	Foreign Keys:	MEMBER_ID, VIDEO_GAME_ID, PAYMENT_ID</H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4></H4>
+<H4>	Table member_payments			</H4>
+<H4>	Field				Type				Null	Key	Extra						</H4>
+<H4>	payment_ID			int(10) unsigned 		NO 	PRI	 				</H4>
+<H4>	payment_type		enum 'rental', 'late fees'</H4>
+<H4>	amount_paid			float</H4>
+<H4></H4>
+<H4>	PREDICATE:</H4>
+<H4>	Payment PAYMENT_ID</H4>
+<H4>	has a payment type PAYMENT_TYPE</H4>
+<H4>	of an amount AMOUNT_PAID</H4>
+<H4></H4>
+<H4>	REFERENTIAL INTEGRITY:</H4>
+<H4>	Done	</H4>
+<H4></H4>
+<H4>	TYPE CONSTRAINTS:</H4>
+<H4>	PAYMENT_ID should be an integer greater than 0.</H4>
+<H4>	PAYMENT_TYPE should be an enumerated 'rental' or 'late fees' values</H4>
+<H4>	AMOUNT_PAID should be a float to represent a monetary amount.</H4>
+<H4></H4>
+<H4>	DATABASE CONSTRAINTS:</H4>
+<H4>	Every PAYMENT_ID should be unique	</H4>
+<H4></H4>
+<H4>	ENTITY INTEGRITY:</H4>
+<H4>	PAYMENT_ID should always exist and no two tuples should have the same PAYMENT_ID value</H4>
+<H4>	PAYMENT_TYPE should always exist</H4>
+<H4>	AMOUNT_PAID should always exist</H4>
+<H4></H4>
+<H4>	RELVAR CANDIDATE KEYS, PRIMARY KEYS and FOREIGN KEYS</H4>
+<H4>	Candidate Keys:	PAYMENT_ID</H4>
+<H4>	Primary Keys:	PAYMENT_ID</H4>
+<H4>	Foreign Keys:	None</H4>
+<H4></H4>
+<H4></H4>

@@ -1,0 +1,66 @@
+GRX CVIDREG Script Generator
+
+TL script generator ran on C7.
+
+GRX_CVIDREG_Script Generator.exe
+
+File from output used:
+
+tl1_logs_CVIDREG.txt
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Use cvidreg.csv file pulled from CMS/iMS
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Output:
+
+N101-1-VB7-2-DFLT (UTICA_258_2),702,Copy Bits,DFLT,
+
+[ID], [SVID], [Priority], [RCVID]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create 2 files:
+
+1_DELETE_CVID_REG.txt
+2_CREATE_CVID_REG.txt
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File 1:
+
+1_DELETE_CVID_REG.txt
+
+
+TL1 command:
+
+DLT-CVIDREG::N101-1-VB7-2-DFLT;
+
+
+Pattern Match
+
+DLT-CVIDREG::[ID];   <- Do not include shelf name (UTICA_258_2)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+File 2:
+
+2_CREATE_CVID_REG.txt
+
+TL1 command:
+
+ENT-CVIDREG::N101-1-VB7-2-DFLT::::SVID=702,PRIO=COPYPBITS,RCVID=DFLT;
+
+
+
+
+
+Pattern Match
+
+ENT-CVIDREG::[ID]::::SVID=[SVID],PRIO=[Priority],RCVID=[RCVID];
+
+
+NOTES:
+For [ID], Do not include shelf name (UTICA_258_2)
+For [Priority], If = Copy Bits, then use COPYPBITS (notice there is a "P" in there), If Priority has a value, then use that value (e.g. Priority 0, use PRIO=0)

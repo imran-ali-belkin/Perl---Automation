@@ -1,0 +1,13 @@
+"CalixE7" Wed Jul 22 02:38:50 1970
+
+Username: e7
+Password: 
+CalixE7>show vlan
+VLAN                                    IGMP Mode        MAC Learning
+--------------------------------------- ---------------- ------------
+1 "System Default VLAN"                 flood            enabled     
+2000 "DHCP_VLAN"                        flood            enabled     
+3000 "Video"                            flood            enabled     
+
+3 VLANs found.
+CalixE7>

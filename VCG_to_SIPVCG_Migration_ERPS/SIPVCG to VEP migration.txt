@@ -1,0 +1,118 @@
+4/16/2012 - Note that this is for a 7.0 VEP to VEP migration.
+
+
+192.168.0.42
+
+N200-1-IG1
+N200-1-IG3
+
+
+Src from N201-1, Destination N200-1
+
+==========================================
+Jason's Main Folder for this Project Type:
+==========================================
+C:\perl-scripts\VCG_to_SIPVCG_Migration_ERPS
+
+----------------------------
+VGP to VEP Migration for ONT
+----------------------------
+c:\perl-scripts\VCG_to_SIPVCG_Migration_ERPS
+
+
+###########################################################################
+#Script completed
+#T0_By_IG_to_VCG_Script_Generator_custom1.exe
+DLT-CRS-T0::N200-1-IG3-906,N202-1-14-1-10-1::::;
+DLT-CRS-T0::N200-1-IG3-896,N202-1-14-1-1-1::::;
+DLT-CRS-T0::N200-1-IG3-907,N202-1-14-1-11-1::::;
+
+# Script completed
+# GPON_Port_Script_Generator.exe
+ED-ONT::N200-1-1-1-29::::VCG=NONE,ADRMODE=GRP;
+
+	rtrv-shelf::all;
+	rtrv-ont::n200-1-all
+ 
+
+#Script Completed
+ENT-CRS-T0::N200-1-IG3-906,N200-1-IG4-NEXT::::;
+ENT-CRS-T0::N200-1-IG3-896,N200-1-IG4-NEXT::::;
+ENT-CRS-T0::N200-1-IG3-907,N200-1-IG4-NEXT::::;
+###########################################################################
+
+Steps to build the script
+1. Retrieve VEP
+
+
+# Retrieve the T0 cross-connects 
+ENT-VEP::N202-1-14-1-10-VEP1::::IGAID=N202-1-IG4,AOR=N200-1-IG3-906,HOSTPROTO=DHCP;
+ENT-VEP::N202-1-14-1-1-VEP1::::IGAID=N202-1-IG4,AOR=N200-1-IG3-896,HOSTPROTO=DHCP;
+ENT-VEP::N202-1-14-1-11-VEP1::::IGAID=N202-1-IG4,AOR=N200-1-IG3-907,HOSTPROTO=DHCP;
+
+
+
+#In this case we'll edit the VEP instead
+# N202-1-16-1-1-VEP1::IGAID=N202-1-IG5,AOR=N201-1-IG1-129,HOSTPROTO=DHCP,:IS-NR,SDEE;
+
+$user_vcg_ig 
+$user_AOR_ig
+
+
+ENT-VLAN-IF::N202-1-14-1-10-VEP1::::VLAN=603,BRIDGE=LOCAL,PORTTYPE=EDGE,ARP=N,DHCPDIR=CLIENT,IGMP=NONE,PPPOEAC=N,PPPOESUB=N,ENCAP=ETHERNETV2,DOS=N,DIRN=DOWN,RXETHBWPROF=ONTVEPLINE3,TXETHBWPROF=ONTVEPLINE3,CVID=UNTAGGED,PRIO=5,RCVID=NONE;
+ENT-VLAN-IF::N202-1-14-1-1-VEP1::::VLAN=603,BRIDGE=LOCAL,PORTTYPE=EDGE,ARP=N,DHCPDIR=CLIENT,IGMP=NONE,PPPOEAC=N,PPPOESUB=N,ENCAP=ETHERNETV2,DOS=N,DIRN=DOWN,RXETHBWPROF=ONTVEPLINE3,TXETHBWPROF=ONTVEPLINE3,CVID=UNTAGGED,PRIO=5,RCVID=NONE;
+ENT-VLAN-IF::N202-1-14-1-11-VEP1::::VLAN=603,BRIDGE=LOCAL,PORTTYPE=EDGE,ARP=N,DHCPDIR=CLIENT,IGMP=NONE,PPPOEAC=N,PPPOESUB=N,ENCAP=ETHERNETV2,DOS=N,DIRN=DOWN,RXETHBWPROF=ONTVEPLINE3,TXETHBWPROF=ONTVEPLINE3,CVID=UNTAGGED,PRIO=5,RCVID=NONE;
+
+
+
+===================================================
+Working with Harsh - 4/16/2012
+1. Retrieve the VLANIF on a per shelf, per VLAN basis
+
+rtrv-vep::n201-all:;
+retrieve VEPs on N201-1, ignore if AOR of N200 (so ignor if AOR
+is N200). now if it does match open a new file handle I can that VEP entry to a text file VEP AOR
+	open file handle and write a VEP Delete based on the passed list
+	open file handle and write a VEP CREATE:
+
+	$future_TDM_Gateway_IG 		
+
+	CREATE VEP DELETE and a CREATE.
+
+
+open the file handle to read of the VEP filtered AOR text file.
+if the VEP (ONT-VEP) matches the VLANIF L2IFAID then build a delete VLANIF command (open a write
+file handle and write it), open a different file hanlde and write a VLANIF create for that entry.
+
+rtrv-vlanif all on N201-1-all::VLAN=603,BRIDGE=LoCAL,DETAILS=Y;
+parse that list through the remaining VEPs that did match. Those are the ones
+that are goin to be deleted.
+
+Perl Script vars:
+$user_current_VB
+$user_current_VLAN
+$user_future_VB
+$user_future_VLAN
+
+
+
+
+	
+
+original AOR, original SIPVCG, original 
+2. Delete the existing VEP - whatever the IG is registered to
+3. Retrieve all the VLANIFs associated to the VEPS
+4. Recreate the VEP
+5. Recreate the VLANIF 
+
+
+===================================================
+
+
+TRUNK VLANIF to each uplink shelf where the SIPVCG resides. Duplicating bandwidth.
+Have to carve out whatever bandwidth we are assigning times 2.
+
+
+
+
+

@@ -1,0 +1,45 @@
+10.208.21.13 (N100-4) to 10.208.33.33 (N187-1)
+
+N100-4-VB1
+VLAN 1048
+
+=======================
+Retrieve the VBPORT
+=======================
+
+Attempt 1:
+rtrv-vbPORT::N100-4-VB1-all;
+
+Output: "N100-4-VB1-3400::ENCAP=ETHERNETV2,DOS=Y,STP=OFF,DIRN=BOTH,STPCOST=100,STPPR
+O=128,STAGTYPE=CTAG_8100,PORTTYPE=EDGE,PINNED=Y"
+
+
+=======================
+Retrieve the VLANVBPORT
+=======================
+rtrv-vlan-vbport
+
+Example:
+RTRV-VLAN-VBPORT::N1-1-VB1-4-1:543:::VLAN=N1-1-VB1-VLAN1,OPT82ACT=NONE;
+
+Attempts:
+rtrv-vlan-vbport::N100-4-VB1-all::::VLAN=N100-4-VB1-VLAN1048 (works)
+
+Output:   "N100-4-VB1-3399::VLAN=N100-4-VB1-VLAN1048,ARP=N,DHCPDIR=NONE,OPT82ACT=NONE,IGMP=NONE,PPPOEAC=N,PPPOESUB=Y,LSVID=1048,"
+
+
+=======================
+Retrieve the CVIDREG
+=======================
+Here you will need to open a file with a listing of the VB ports and
+append all:
+
+
+Output:
+> rtrv-cvidreg::N100-4-VB1-3400-all;
+>
+
+   WHFSMTXAH01 02-07-18 12:57:31
+M  1 COMPLD
+   "N100-4-VB1-3400-UNTAGGED::SVID=1048,PRIO=0,RCVID=NONE"
+   /* One record processed */
